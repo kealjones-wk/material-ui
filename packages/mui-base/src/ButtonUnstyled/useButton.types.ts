@@ -16,16 +16,9 @@ interface UseButtonRootSlotOwnProps {
   ref: React.Ref<any>;
 }
 
-export type UseButtonRootSlotProps<TOther = {}> = Omit<TOther, keyof UseButtonRootSlotOwnProps> &
-  UseButtonRootSlotOwnProps;
+export type UseButtonRootSlotProps<TOther = {}> = TOther & UseButtonRootSlotOwnProps;
 
 export interface UseButtonParameters {
-  /**
-   * The component used for the Root slot.
-   * Either a string to use a HTML element or a component.
-   * @default 'button'
-   */
-  component?: React.ElementType;
   /**
    * If `true`, the component is disabled.
    * @default false
