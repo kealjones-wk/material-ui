@@ -288,10 +288,18 @@ const SelectInput = React.forwardRef(function SelectInput(props, ref) {
         // Clone the event to not override `target` of the original event.
         const nativeEvent = event.nativeEvent || event;
         const clonedEvent = new nativeEvent.constructor(nativeEvent.type, nativeEvent);
-
+        const clonedEventTarget = Object.assign({}, nativeEvent.target);
+        Object.defineProperty(clonedEventTarget, 'value', {
+          writable: true,
+          value: newValue,
+        });
+        Object.defineProperty(clonedEventTarget, 'name', {
+          writable: true,
+          value: name,
+        })
         Object.defineProperty(clonedEvent, 'target', {
           writable: true,
-          value: { value: newValue, name },
+          value: clonedEventTarget,
         });
         onChange(clonedEvent, child);
       }
